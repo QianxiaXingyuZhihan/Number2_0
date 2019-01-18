@@ -32,18 +32,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 		findViewById(R.id.mainHelp).setOnClickListener(this);
 		findViewById(R.id.mainAbout).setOnClickListener(this);
     }
-
-	@Override
-	protected void onPause() {
-		player.pause();
-		super.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		player.start();
-		super.onResume();
-	}
 	
 	@Override
 	protected void onDestroy() {

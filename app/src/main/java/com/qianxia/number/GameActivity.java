@@ -239,6 +239,13 @@ public class GameActivity extends BaseActivity implements View.OnClickListener{
 						break;
 				}
 			}
+		} else if (people == 2) {
+			if (now == ONE) {
+				message = "玩家乙胜利";
+			} else {
+				message = "玩家甲胜利";
+			}
+			
 		}
 		editor.apply();
 		if (people == 1) {message += "\n难度: "+difficult;}
