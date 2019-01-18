@@ -34,6 +34,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
 	@Override
+	protected void onPause() {
+		player.pause();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		player.start();
+		super.onResume();
+	}
+	
+	@Override
 	protected void onDestroy() {
 		player.stop();
 		super.onDestroy();
