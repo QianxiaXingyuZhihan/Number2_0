@@ -2,13 +2,11 @@ package com.qianxia.number;
 
 import android.content.*;
 import android.content.res.*;
-import android.media.*;
 import android.os.*;
 import android.view.*;
+import android.media.*;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
-	
-	private MediaPlayer player = new MediaPlayer();
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +30,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 		findViewById(R.id.mainHelp).setOnClickListener(this);
 		findViewById(R.id.mainAbout).setOnClickListener(this);
     }
-	
-	@Override
-	protected void onDestroy() {
-		player.stop();
-		super.onDestroy();
-	}
 
 	@Override
 	public void onClick(View v) {
