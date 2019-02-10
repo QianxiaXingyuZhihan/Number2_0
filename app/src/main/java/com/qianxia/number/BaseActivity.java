@@ -5,7 +5,7 @@ import android.media.*;
 
 public class BaseActivity extends Activity {
 
-    protected  MediaPlayer player = new MediaPlayer();
+    static protected  MediaPlayer player = new MediaPlayer();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,6 @@ public class BaseActivity extends Activity {
 	protected void onResume() {
 		player.start();
 		super.onResume();
-	}
-
-	@Override
-	protected void onDestroy() {
-		player.stop();
-		super.onDestroy();
 	}
 	
 }
