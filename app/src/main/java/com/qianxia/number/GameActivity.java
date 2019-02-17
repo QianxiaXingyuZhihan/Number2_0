@@ -172,7 +172,7 @@ public class GameActivity extends BaseActivity implements View.OnClickListener{
 			}
 		} else {
 			for (int i = 0; i < map; i++) {
-				if (cache[i%x][(int)i/x] == CACHECLICK) {
+				if (cache[i%x][(int)i/x] == CACHECLICK && difficulty != SetActivity.HARD) {
 					((Button) findViewById(i)).setBackgroundColor(Color.RED);
 					((Button) findViewById(i)).getBackground().setAlpha(alpha);
 				}
@@ -225,9 +225,14 @@ public class GameActivity extends BaseActivity implements View.OnClickListener{
 			else {message = "玩家乙胜利";}
 		}
 		editor.apply();
-		if (people == 1) {message += "\n难度: "+difficult;}
-		if (first == SetActivity.PLAYER) {message += "   先手：玩家先手";}
-		else {message += "   先手：电脑先手";}
+		if (people == 1) {
+			message += "\n难度: "+difficult;
+		    if (first == SetActivity.PLAYER) {
+				message += "   先手：玩家先手";
+			} else {
+				message += "   先手：电脑先手";
+			}
+		}
 		message += "\n时间: "+ft.format(date);
 		
 		dialog.setMessage(message);
