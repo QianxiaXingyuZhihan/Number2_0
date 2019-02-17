@@ -6,6 +6,8 @@ import android.preference.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
+import java.util.*;
+import java.text.*;
 
 public class SetActivity extends BaseActivity {
 
@@ -21,11 +23,16 @@ public class SetActivity extends BaseActivity {
 	
 	private SharedPreferences pref;
 	private SharedPreferences.Editor editor;
+	private Date passTime = null;
+	private String message;
+    private SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
 	
+	private long record;
 	private int difficulty;
 	private int first;
 	private int map;
 	
+	private TextView recordTime;
 	private RadioButton easy, medium, hard, playerFirst, computer,
 	    map20, map30, map42, map56;
 	
@@ -42,6 +49,7 @@ public class SetActivity extends BaseActivity {
 			    SetActivity.this.finish();
 			}
 		});
+		recordTime = (TextView) findViewById(R.id.recordTime);
 	    easy = (RadioButton) findViewById(R.id.easy);
 		medium = (RadioButton) findViewById(R.id.medium);
 		hard = (RadioButton) findViewById(R.id.hard);
@@ -51,7 +59,7 @@ public class SetActivity extends BaseActivity {
 		map30 = (RadioButton) findViewById(R.id.map30);
 		map42 = (RadioButton) findViewById(R.id.map42);
 		map56 = (RadioButton) findViewById(R.id.map56);
-		init();
+		init();updateRecord();
 	    RadioGroup groupDifficulty = (RadioGroup) findViewById(R.id.groupDifficulty);
 	    RadioGroup groupFirst = (RadioGroup) findViewById(R.id.groupFirst);
 	    RadioGroup groupMap = (RadioGroup) findViewById(R.id.groupMap);
@@ -63,7 +71,7 @@ public class SetActivity extends BaseActivity {
 			        case R.id.easy:editor.putInt("difficulty", EASY);break;
 			        case R.id.medium:editor.putInt("difficulty", MEDIUM);break;
 			        case R.id.hard:editor.putInt("difficulty", HARD);break;
-		        }editor.apply();
+		        }editor.apply();updateRecord();
 		    }
 		});
 		groupFirst.setOnCheckedChangeListener(
@@ -73,7 +81,7 @@ public class SetActivity extends BaseActivity {
 				switch (checkedId) {
 					case R.id.playerFirst:editor.putInt("first", PLAYER);break;
 					case R.id.computerFirst:editor.putInt("first", COMPUTER);break;
-				}editor.apply();
+				}editor.apply();updateRecord();
 			}
 		});
 		groupMap.setOnCheckedChangeListener(
@@ -85,7 +93,7 @@ public class SetActivity extends BaseActivity {
 					case R.id.map30:editor.putInt("map", FIVESIX);break;
 					case R.id.map42:editor.putInt("map", SIXSEVEN);break;
 					case R.id.map56:editor.putInt("map", SEVENEIGHT);break;
-				}editor.apply();
+				}editor.apply();updateRecord();
 			}
 		});
 	}
@@ -127,6 +135,16 @@ public class SetActivity extends BaseActivity {
 				map56.setChecked(true);
 				break;
 		}
+	}
+	
+	private void updateRecord() {
+		difficulty = pref.getInt("difficulty", EASY);
+	    first = pref.getInt("first", PLAYER);
+	    map = pref.getInt("map", FOURFIVE);
+		record = pref.getLong(String.valueOf(100*map+10*first+difficulty), 0);
+		passTime = new Date(record);
+		message = "纪录:"+ft.format(passTime);
+		recordTime.setText(message);
 	}
 
 }

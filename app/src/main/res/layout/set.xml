@@ -33,14 +33,31 @@
 
 	</LinearLayout>
 
-	<TextView
+	<LinearLayout
 		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:text="难度"
-		android:textSize="30sp"
-		android:textColor="#FF5FAAB6"
-		android:layout_marginBottom="10dp"
-		android:layout_gravity="left"/>
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:background="#FFA1D6F5">
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="难度"
+			android:textSize="30sp"
+			android:textColor="#FF5FAAB6"
+			android:layout_marginBottom="10dp"
+			android:layout_gravity="left"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="纪录:"
+			android:textColor="#FFC56C06"
+			android:textSize="40sp"
+			android:layout_marginLeft="60dp"
+			android:id="@+id/recordTime"/>
+
+	</LinearLayout>
 
 	<RadioGroup
 		android:layout_height="wrap_content"

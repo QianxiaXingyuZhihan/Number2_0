@@ -212,36 +212,22 @@ public class GameActivity extends BaseActivity implements View.OnClickListener{
 			} else {
 				message = "玩家胜利";win = 2;
 				dialog.setTitle("胜利");
-				switch (difficulty) {
-					case SetActivity.EASY:
-						overTime = pref.getLong("easytime", 0);
-						if (date.getTime() < overTime || overTime == 0 && win == 2) {
-							passTime = new Date(overTime);
-							message += "\n已破历史记录"+ft.format(passTime);
-							editor.putLong("easytime", date.getTime());
-						}
-						break;
-					case SetActivity.MEDIUM:
-						overTime = pref.getLong("mediumtime", 0);
-						if (date.getTime() < overTime || overTime == 0 && win == 2) {
-							passTime = new Date(overTime);
-							message += "\n已破历史记录"+ft.format(passTime);
-							editor.putLong("mediumtime", date.getTime());
-						}
-						break;
-					case SetActivity.HARD:
-						overTime = pref.getLong("hardtime", 0);
-						if (date.getTime() < overTime || overTime == 0 && win == 2) {
-							passTime = new Date(overTime);
-							message += "\n已破历史记录"+ft.format(passTime);
-							editor.putLong("hardtime", date.getTime());
-						}
-						break;
+				overTime = pref.getLong(String.valueOf(100*map+10*first+difficulty), 0);
+				if (date.getTime() < overTime || overTime == 0 && win == 2) {
+					passTime = new Date(overTime);
+					message += "\n已破历史记录"+ft.format(passTime);
+					editor.putLong(String.valueOf(100*map+10*first+difficulty), date.getTime());
 				}
 			}
 		}
+		else {
+			if (now == TWO) {message = "玩家甲胜利";}
+			else {message = "玩家乙胜利";}
+		}
 		editor.apply();
 		if (people == 1) {message += "\n难度: "+difficult;}
+		if (first == SetActivity.PLAYER) {message += "   先手：玩家先手";}
+		else {message += "   先手：电脑先手";}
 		message += "\n时间: "+ft.format(date);
 		
 		dialog.setMessage(message);
